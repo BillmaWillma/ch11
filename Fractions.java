@@ -37,6 +37,13 @@ public class Fractions {
         numerator = f.getNum();
     }
 
+	public static Fractions mult(Fractions a, Fractions b){
+			int denominator = a.getDenom ()* b.getDenom();
+			int numerator = a.getNum()*b.getNum();
+				Fractions ans = new Fractions(numerator, denominator);
+			return ans;
+	}
+
     // behaviour methods (accessor, mutator, helper)
     public int getNum() { // accessors (must be public)
         return numerator;
