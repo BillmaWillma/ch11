@@ -37,36 +37,82 @@ public class Fractions {
         numerator = f.getNum();
     }
 
-	public static Fractions mult(Fractions a, Fractions b){
-			int denominator = a.getDenom ()* b.getDenom();
-			int numerator = a.getNum()*b.getNum();
-				Fractions ans = new Fractions(numerator, denominator);
-			return ans;
-	}
-
-    // behaviour methods (accessor, mutator, helper)
-    public int getNum() { // accessors (must be public)
-        return numerator;
+    public static Fractions mult(Fractions a, Fractions b) {
+        int denominator = a.getDenom() * b.getDenom();
+        int numerator = a.getNum() * b.getNum();
+        Fractions ans = new Fractions(numerator, denominator);
+        return reduce(ans);
     }
 
-    public int getDenom() { // accessor
-        return denominator;
+    public static Fractions div(Fractions a, Fractions b) {
+        int denominator = a.getDenom() / b.getDenom();
+        int numerator = a.getNum() / b.getNum();
+        Fractions ans = new Fractions(numerator, denominator);
+        return reduce(ans);
     }
 
-    public String toString() {
-        return numerator + "/" + denominator;
+    public static Fractions add(Fractions a, Fractions b) {
+        int denominator = a.getDenom() * b.getDenom();
+        int na = a.getNum() * b.getDenom();
+        int nb = b.getNum() * a.getDenom();
+        Fractions ans = new Fractions(na + nb, denominator);
+        return reduce(ans);
     }
 
-    public double toDouble() {
-        return (double) numerator / denominator;
+    public static Fractions min(Fractions a, Fractions b) {
+        int denominator = a.getDenom() * b.getDenom();
+        int na = a.getNum() * b.getDenom();
+        int nb = b.getNum() * a.getDenom();
+        Fractions ans = new Fractions(na - nb, denominator);
+        return reduce(ans);
     }
 
-    public void setNum(int n) { // mutator
-        numerator = n;
+    public static Fractions reduce(Fractions a) {
+		int numerator = a.getNum()/gcm(a);
+		int denominator = a.getDenom()/gcm(a);
+        Fractions ans = new Fractions(numerator, denominator);
+        return ans;
     }
 
-    public void setDenom(int d) { // mutator
-        denominator = d;
-        checkzero();
+    public static int gcm(Fractions a) {
+      int num = a.getNum();
+      int denom = a.getDenom();
+        while (num != denom) {
+            if (num > denom) {
+                num = num - denom;
+            } else {
+                denom = denom - num;
+            }
+        }
+
+        return num;
     }
+
+
+// behaviour methods (accessor, mutator, helper)
+
+public int getNum() { // accessors (must be public)
+    return numerator;
+}
+
+public int getDenom() { // accessor
+    return denominator;
+}
+
+public String toString() {
+    return numerator + "/" + denominator;
+}
+
+public double toDouble() {
+    return (double) numerator / denominator;
+}
+
+public void setNum(int n) { // mutator
+    numerator = n;
+}
+
+public void setDenom(int d) { // mutator
+    denominator = d;
+    checkzero();
+}
 }
