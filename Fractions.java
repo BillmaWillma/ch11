@@ -84,10 +84,8 @@ public class Fractions {
                 denom = denom - num;
             }
         }
-
         return num;
     }
-
 
 // behaviour methods (accessor, mutator, helper)
 
